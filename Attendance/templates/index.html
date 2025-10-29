@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Student Attendance Management System</h1>
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <h3 id="totalStudents">0</h3>
+                    <p>Total Students</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="presentToday">0</h3>
+                    <p>Present Today</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="absentToday">0</h3>
+                    <p>Absent Today</p>
+                </div>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="students">Students</button>
+            <button class="tab-btn" data-tab="attendance">Mark Attendance</button>
+            <button class="tab-btn" data-tab="reports">Reports</button>
+        </nav>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-content active">
+            <div class="section-header">
+                <h2>Student Management</h2>
+                <button class="btn btn-primary" onclick="showAddStudentForm()">+ Add Student</button>
+            </div>
+
+            <div class="controls">
+                <input type="text" id="searchInput" placeholder="Search by name, roll number, or class..." class="search-input">
+                <select id="sortSelect" class="sort-select">
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="roll_number-asc">Roll Number (Ascending)</option>
+                    <option value="roll_number-desc">Roll Number (Descending)</option>
+                    <option value="class-asc">Class (A-Z)</option>
+                </select>
+            </div>
+
+            <div id="studentsList" class="students-grid"></div>
+        </div>
+
+        <!-- Attendance Tab -->
+        <div id="attendance" class="tab-content">
+            <div class="section-header">
+                <h2>Mark Attendance</h2>
+                <input type="date" id="attendanceDate" class="date-input">
+            </div>
+            <div id="attendanceList" class="attendance-list"></div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reports" class="tab-content">
+            <div class="section-header">
+                <h2>Attendance Reports</h2>
+            </div>
+            <div id="reportsList" class="reports-grid"></div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddStudentForm()">&times;</span>
+            <h2>Add New Student</h2>
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Roll Number:</label>
+                    <input type="text" name="roll_number" required>
+                </div>
+                <div class="form-group">
+                    <label>Class:</label>
+                    <input type="text" name="class" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Graph Modal -->
+    <div id="graphModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" onclick="closeGraphModal()">&times;</span>
+            <h2 id="graphTitle">Attendance Report</h2>
+            <div id="graphContainer"></div>
+        </div>
+    </div>
+</body>
+</html>
